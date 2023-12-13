@@ -7,7 +7,7 @@ const {ApolloServer} = require("apollo-server")
 
 const {typeDefs} = require("./schema/typedefs")
 
-//resolvers are functions that make teh queries work
+//resolvers are functions that make the queries work
 
 const {resolvers} = require("./schema/resolvers")
 
