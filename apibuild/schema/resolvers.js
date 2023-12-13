@@ -39,6 +39,44 @@ const resolvers = {
         favoriteMovies() {
             return _.filter(movieList, (movie) => movie.year >= 2000 && movie.year <= 2010) //We set the favorite movies field to movies released between 2000 and 2010
         }
+    },
+    Mutation: {
+        //Mutations are type of 'request' that changes data(create, update, delete)
+        createUser(parent, args) {
+
+            const user = args.input
+            //The input is a json
+            const lastId = userList[userList.length - 1].id //We get the last id
+
+            user.id = lastId + 1
+
+            userList.push(user)//Then we add the new user to the list
+            return user
+
+        },
+        updateUsername(parent, args) {
+
+            const {id, newUsername} = args.input //This time we dont need the user, just the id and the new username
+            let updatedUser
+
+            userList.forEach((user) => {
+                if (user.id == id) {
+                    //We check if any id of the list matches with the id pased, if so, we update the data
+                    user.username = newUsername 
+                    updatedUser = user
+                }
+             })
+
+             return updatedUser
+
+        },
+        deleteUser(parent, args) {
+
+            const id = args.id
+            _.remove(userList, (user) => user.id === Number(id)) //We search for any id in the list that matches, then we delete the user with that id
+            return null
+
+        }
     }
 
 }
