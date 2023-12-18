@@ -1,4 +1,4 @@
-import { useQuery, useLazyQuery, gql } from "@apollo/client"
+import { useQuery, useLazyQuery, gql, useMutation } from "@apollo/client"
 import { useState } from "react"
 
 const QUERY_ALL_USERS = gql`
@@ -32,7 +32,14 @@ const QUERY_MOVIE= gql`
         }
 }
 `
-
+const MUTATION_CREATE_USER = gql`
+    mutation CreateUser($input: CreateUser!) {
+        createUser(input: $input) {
+            name
+            id
+        }
+    }
+`
 interface User {
     id: number | string,
     name: string,
@@ -52,9 +59,16 @@ export default function DisplayData() {
 
     const [movieSearch, setMovieSearch] = useState("")
 
-    const {data, loading, error} = useQuery(QUERY_ALL_USERS)
+    const [name, setName] = useState("")
+    const [username, setUsername] = useState("")
+    const [nationality, setNationality] = useState("")
+    const [age, setAge] = useState(18)
+
+    const {data, loading, error, refetch} = useQuery(QUERY_ALL_USERS)
     const {data: movieData, loading: movieLoad, error: movieError} = useQuery(QUERY_ALL_MOVIES)
     const [fetchMovie, {data: MVSData, error: MVSError}] = useLazyQuery(QUERY_MOVIE)
+
+    const [createUser] = useMutation(MUTATION_CREATE_USER)
 
     if (loading || movieLoad) {
         return <h1>Data loading</h1>
@@ -69,6 +83,21 @@ export default function DisplayData() {
     return (
     
         <section>
+
+            <div>
+                <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)}/>
+                <input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)}/>
+                <input type="text" placeholder="Nationality" onChange={(e) => setNationality(e.target.value.toUpperCase())} />
+                <input type="number" placeholder="Age" onChange={(e) => setAge(Number(e.target.value))}/>
+
+                <input type="submit" value="Create" onClick={() => {createUser({
+                    variables: {input: {name, username, age, nationality}}
+                    })
+                    refetch()
+
+                }
+                } />
+            </div>
 
             <h2>All users</h2>
 
