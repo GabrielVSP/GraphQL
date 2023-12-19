@@ -15,12 +15,17 @@ const QUERY_ALL_USERS = gql`
 const QUERY_ALL_MOVIES = gql`
     query getmovies {
     movies {
+        ...Data
+    }
+    }
+
+    fragment Data on Movie {
         id
         name
         year
         isInTheaters
     }
-}
+
 `
 
 const QUERY_MOVIE= gql`

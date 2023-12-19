@@ -11,7 +11,9 @@ const {typeDefs} = require("./schema/typedefs")
 
 const {resolvers} = require("./schema/resolvers")
 
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({ typeDefs, resolvers, context: ({req}) => { //req returns data about the request
+    return {req}
+} })
 
 server.listen().then(({url}) => {
     //After the server has been loaded
