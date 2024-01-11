@@ -8,12 +8,28 @@ const typeDefs = gql`
         short_description: String!
         genre: String!
         publisher: String!
+        platform: String!
         release_date: String!
     }
 
     type Query {
-        games: [Game!]!
+        games: GamesResult!
+        game(id: ID!): GamesResult!
+        gamesByPlatform(platform: String!): GamesResult!
+        gamesByGenre(genre: String!): GamesResult!
+        gamesByPlatformGenre(platform: String!, genre: String!): GamesResult!
     }
+
+    type GameSuc {
+        games: [Game!]
+    }
+
+    type GameError {
+        message: String!
+    }
+
+    union GamesResult = GameSuc | GameError
+
 
 `
 
