@@ -15,29 +15,6 @@ body {
 
 }
 
-header {
-
-    padding: 15px;
-
-    background: rgb(27, 27, 27);
-    color: white;
-
-}
-
-header h1 {
-
-    font-weight: normal;
-    font-size: 1.4em;
-
-}
-
-header strong {
-
-    font-weight: normal;
-    border-bottom: 1px solid white;
-
-}
-
 main section.apiinfo {
 
     padding: 10px;

@@ -1,5 +1,8 @@
-import AllGames from "../components/allGames";
-import Game from "../components/game";
+import Footer from "../components/footer";
+import AllGames from "../components/games/allGames";
+import ByGenrePlatform from "../components/games/bygenreplat";
+import Game from "../components/games/game";
+import Header from "../components/header";
 import "../styles/home.css";
 
 export default function Home() {
@@ -8,9 +11,7 @@ export default function Home() {
 
         <>
 
-            <header>
-                <h1><strong>Omega</strong> Industries - Games API</h1>
-            </header>
+            <Header />
 
             <main>
 
@@ -20,8 +21,11 @@ export default function Home() {
 
                 <AllGames />
                 <Game />
+                <ByGenrePlatform />
 
             </main>
+
+            <Footer />
 
         </>
 

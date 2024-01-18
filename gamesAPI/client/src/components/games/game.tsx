@@ -1,7 +1,7 @@
 import { gql, useLazyQuery } from "@apollo/client";
 import { useRef, useState } from "react";
 
-import "../styles/allgames.css"
+import "../../styles/allgames.css"
 
 const QUERY_GAMES = gql`
     query getGame($id: ID!) {

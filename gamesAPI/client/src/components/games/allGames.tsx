@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { useRef } from "react";
 
-import "../styles/allgames.css"
+import "../../styles/allgames.css"
 
 const QUERY_ALL_GAMES = gql`
     query getGames {
@@ -47,9 +47,10 @@ export default function AllGames() {
 
         if(data) {
 
-            data.games.games.map((game: Game, key: number) => {
+            data.games.games.map((game: Game, key: string) => {
 
                 let div = document.createElement("div")
+                div.setAttribute("key", key)
                 div.className = "game"
 
                 let title = document.createElement("p")
