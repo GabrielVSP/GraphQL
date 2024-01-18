@@ -82,12 +82,12 @@ export default function AllGames() {
                 <p>Gera uma lista de jogos contendo: título, gênero e descrição.</p>
 
                 <button onClick={placeData}>Gerar lista</button>
-                
+
             </div>
 
             <section className="holdSect">
 
-                <div ref={holder}>
+                <div ref={holder} className="holder">
 
 
                 </div>
